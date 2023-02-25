@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+from bot.tg_bot.managers import CustomUserManager
 
 
 class BaseModel(models.Model):
@@ -37,3 +40,8 @@ class Product(BaseModel):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+
+
+class User(AbstractUser):
+    tg_id = models.BigIntegerField(unique=True)
+    objects = CustomUserManager()
