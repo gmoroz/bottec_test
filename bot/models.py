@@ -7,15 +7,24 @@ class BaseModel(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        abstract = True
+
 
 class Category(BaseModel):
-    pass
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
 
 
 class Subcategory(BaseModel):
     parent_category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="subcategories"
     )
+
+    class Meta:
+        verbose_name = "Подкатегория"
+        verbose_name_plural = "Подкатегории"
 
 
 class Product(BaseModel):
@@ -24,3 +33,7 @@ class Product(BaseModel):
     sub_category = models.ForeignKey(
         Subcategory, on_delete=models.CASCADE, related_name="products"
     )
+
+    class Meta:
+        verbose_name = "Товар"
+        verbose_name_plural = "Товары"
