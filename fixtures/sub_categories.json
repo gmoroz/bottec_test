@@ -2,31 +2,31 @@
   {
     "model": "bot.subcategory",
     "pk": 1,
-    "fields": { "name": "Шкафы для одежды", "category": 1 }
+    "fields": { "name": "Шкафы для одежды", "parent_category": 1 }
   },
   {
     "model": "bot.subcategory",
     "pk": 2,
-    "fields": { "name": "Стеллажи", "category": 1 }
+    "fields": { "name": "Стеллажи", "parent_category": 1 }
   },
   {
     "model": "bot.subcategory",
     "pk": 3,
-    "fields": { "name": "Холодильники", "category": 2 }
+    "fields": { "name": "Холодильники", "parent_category": 2 }
   },
   {
     "model": "bot.subcategory",
     "pk": 4,
-    "fields": { "name": "Пылесосы", "category": 2 }
+    "fields": { "name": "Пылесосы", "parent_category": 2 }
   },
   {
     "model": "bot.subcategory",
     "pk": 5,
-    "fields": { "name": "Смартфоны", "category": 3 }
+    "fields": { "name": "Смартфоны", "parent_category": 3 }
   },
   {
     "model": "bot.subcategory",
     "pk": 6,
-    "fields": { "name": "Ноутбуки", "category": 3 }
+    "fields": { "name": "Ноутбуки", "parent_category": 3 }
   }
 ]
