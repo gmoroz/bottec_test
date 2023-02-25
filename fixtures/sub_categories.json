@@ -1,0 +1,32 @@
+[
+  {
+    "model": "bot.subcategory",
+    "pk": 1,
+    "fields": { "name": "Шкафы для одежды", "category": 1 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 2,
+    "fields": { "name": "Стеллажи", "category": 1 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 3,
+    "fields": { "name": "Холодильники", "category": 2 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 4,
+    "fields": { "name": "Пылесосы", "category": 2 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 5,
+    "fields": { "name": "Смартфоны", "category": 3 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 6,
+    "fields": { "name": "Ноутбуки", "category": 3 }
+  }
+]

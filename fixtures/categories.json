@@ -1,0 +1,5 @@
+[
+  { "model": "bot.category", "pk": 1, "fields": { "name": "Мебель" } },
+  { "model": "bot.category", "pk": 2, "fields": { "name": "Бытовая техника" } },
+  { "model": "bot.category", "pk": 3, "fields": { "name": "Электроника" } }
+]

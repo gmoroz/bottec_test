@@ -1,0 +1,242 @@
+[
+  {
+    "model": "bot.product",
+    "pk": 1,
+    "fields": {
+      "name": "Шкаф для одежды Романтика",
+      "description": "Шкаф для одежды Романтика – прекрасное решение для вашей спальни. Компактный, стильный и функциональный – именно таким должен быть шкаф для одежды в вашем доме.",
+      "image": "images/test_image.jpg",
+      "subcategory": 1
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 2,
+    "fields": {
+      "name": "Шкаф для одежды Фаворит",
+      "description": "Шкаф для одежды Фаворит – это мебель, которая прекрасно впишется в любой интерьер. Простой дизайн, высокое качество материалов и удобная конструкция сделают вашу жизнь комфортнее.",
+      "image": "images/test_image.jpg",
+      "subcategory": 1
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 3,
+    "fields": {
+      "name": "Шкаф для одежды Классик",
+      "description": "Шкаф для одежды Классик – это мебель, которая подчеркнет ваш безупречный вкус и чувство стиля. Классический дизайн, качественные материалы и удобная конструкция – все это делает этот шкаф отличным выбором.",
+      "image": "images/test_image.jpg",
+      "subcategory": 1
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 4,
+    "fields": {
+      "name": "Шкаф для одежды Модерн",
+      "description": "Шкаф для одежды Модерн – это мебель, которая подчеркнет ваш современный взгляд на дизайн и комфорт. Оригинальный дизайн, высокое качество материалов и удобная конструкция – все это делает этот шкаф отличным выбором.",
+      "image": "images/test_image.jpg",
+      "subcategory": 1
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 5,
+    "fields": {
+      "name": "Стеллаж для хранения посуды",
+      "description": "Компактный стеллаж для хранения посуды изготовленный из качественного материала.",
+      "image": "images/test_image.jpg",
+      "subcategory": 2
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 6,
+    "fields": {
+      "name": "Стеллаж для книг",
+      "description": "Удобный и практичный стеллаж для хранения книг. Идеально подойдет для организации библиотеки дома или в офисе.",
+      "image": "images/test_image.jpg",
+      "subcategory": 2
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 7,
+    "fields": {
+      "name": "Стеллаж для детской игрушек",
+      "description": "Яркий и красочный стеллаж для хранения детских игрушек. Он не только позволяет удобно хранить игрушки, но и дополнит интерьер детской комнаты.",
+      "image": "images/test_image.jpg",
+      "subcategory": 2
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 8,
+    "fields": {
+      "name": "Стеллаж для обуви",
+      "description": "Компактный и удобный стеллаж для хранения обуви. Благодаря своей конструкции, он позволяет оптимально использовать пространство и удобно организовать хранение обуви.",
+      "image": "images/test_image.jpg",
+      "subcategory": 2
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 9,
+    "fields": {
+      "name": "Холодильник Samsung RS64R5101B1/TL",
+      "description": "Стильный и мощный холодильник Samsung RS64R5101B1/TL вмещает до 570 литров и имеет удобную функцию No Frost. Технология All-Around Cooling позволяет поддерживать постоянную температуру внутри холодильника, а Digital Inverter тихо и эффективно работает, экономя энергию.",
+      "image": "images/test_image.jpg",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 10,
+    "fields": {
+      "name": "Холодильник LG GA-B519SEQZ",
+      "description": "Элегантный и компактный холодильник LG GA-B519SEQZ вмещает до 454 литров и имеет удобную функцию No Frost. Технология Door Cooling позволяет быстро охлаждать напитки и продукты, а интеллектуальный компрессор Linear Inverter экономит энергию.",
+      "image": "images/test_image.jpg",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 11,
+    "fields": {
+      "name": "Холодильник Bosch KGN56XIFAE",
+      "description": "Современный и надежный холодильник Bosch KGN56XIFAE вмещает до 570 литров и имеет удобную функцию No Frost. Технология VitaFresh Plus сохраняет свежесть фруктов, овощей и мяса на дольший срок, а инверторный компрессор работает тихо и экономично.",
+      "image": "images/test_image.jpg",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 12,
+    "fields": {
+      "name": "Холодильник Indesit LI7 FF1 X",
+      "description": "Простой и надежный холодильник Indesit LI7 FF1 X вмещает до 307 литров и имеет удобную функцию No Frost. Технология Super Cool позволяет быстро охлаждать продукты после загрузки, а компрессор работает тихо и стабильно.",
+      "image": "images/test_image.jpg",
+      "subcategory": 3
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 13,
+    "fields": {
+      "name": "Пылесос Philips PowerPro Compact",
+      "description": "Этот пылесос оснащен мощным двигателем и легок в управлении.",
+      "image": "images/test_image.jpg",
+      "subcategory": 4
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 14,
+    "fields": {
+      "name": "Пылесос Midea",
+      "description": "Стильный и функциональный пылесос с высокой мощностью.",
+      "image": "images/test_image.jpg",
+      "subcategory": 4
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 15,
+    "fields": {
+      "name": "Пылесос Rowenta",
+      "description": "Мощный и тихий пылесос, идеальный для любого дома.",
+      "image": "images/test_image.jpg",
+      "subcategory": 4
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 16,
+    "fields": {
+      "name": "Пылесос Samsung",
+      "description": "Самый мощный и технологичный пылесос на рынке.",
+      "image": "images/test_image.jpg",
+      "subcategory": 4
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 17,
+    "fields": {
+      "name": "Samsung Galaxy S21",
+      "description": "Новый флагман от Samsung с OLED-дисплеем, 8 ГБ ОЗУ и 128 ГБ встроенной памяти",
+      "image": "images/test_image.jpg",
+      "subcategory": 5
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 18,
+    "fields": {
+      "name": "Apple iPhone 12 Pro",
+      "description": "Новый флагман от Apple с OLED-дисплеем, A14 Bionic, и 128 ГБ встроенной памяти",
+      "image": "images/test_image.jpg",
+      "subcategory": 5
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 19,
+    "fields": {
+      "name": "OnePlus 9 Pro",
+      "description": "Новый флагман от OnePlus с AMOLED-дисплеем, Snapdragon 888, и 128 ГБ встроенной памяти",
+      "image": "images/test_image.jpg",
+      "subcategory": 5
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 20,
+    "fields": {
+      "name": "Xiaomi Mi 11",
+      "description": "Новый флагман от Xiaomi с AMOLED-дисплеем, Snapdragon 888, и 256 ГБ встроенной памяти",
+      "image": "images/test_image.jpg",
+      "subcategory": 5
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 21,
+    "fields": {
+      "name": "Ноутбук Acer Aspire 5",
+      "description": "Ноутбук Acer Aspire 5 является отличным выбором для офисных задач, веб-серфинга и мультимедиа. Он оснащен Intel Core i5, 8 ГБ оперативной памяти и 256 ГБ SSD-накопителем.",
+      "image": "images/test_image.jpg",
+      "subcategory": 6
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 22,
+    "fields": {
+      "name": "Ноутбук HP Pavilion x360",
+      "description": "Ноутбук HP Pavilion x360 имеет сенсорный дисплей, что делает его удобным для работы с приложениями и использования в режиме планшета. Он оснащен Intel Core i3, 4 ГБ оперативной памяти и 128 ГБ SSD-накопителем.",
+      "image": "images/test_image.jpg",
+      "subcategory": 6
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 23,
+    "fields": {
+      "name": "Ноутбук ASUS VivoBook S14",
+      "description": "Ноутбук ASUS VivoBook S14 имеет компактный и легкий дизайн, который делает его удобным для переноски. Он оснащен Intel Core i7, 16 ГБ оперативной памяти и 512 ГБ SSD-накопителем.",
+      "image": "images/test_image.jpg",
+      "subcategory": 6
+    }
+  },
+  {
+    "model": "bot.product",
+    "pk": 24,
+    "fields": {
+      "name": "Ноутбук Lenovo ThinkPad E14",
+      "description": "Ноутбук Lenovo ThinkPad E14 является отличным выбором для бизнес-задач и профессиональной работы. Он оснащен Intel Core i5, 8 ГБ оперативной памяти и 256 ГБ SSD-накопителем.",
+      "image": "images/test_image.jpg",
+      "subcategory": 6
+    }
+  }
+]
