@@ -13,7 +13,7 @@ class Category(BaseModel):
 
 
 class Subcategory(BaseModel):
-    category = models.ForeignKey(
+    parent_category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="subcategories"
     )
 
@@ -21,6 +21,6 @@ class Subcategory(BaseModel):
 class Product(BaseModel):
     description = models.TextField()
     image = models.ImageField()
-    subcategory = models.ForeignKey(
+    sub_category = models.ForeignKey(
         Subcategory, on_delete=models.CASCADE, related_name="products"
     )
