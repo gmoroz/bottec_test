@@ -11,4 +11,4 @@ repos:
     rev: v0.0.252
     hooks:
       - id: ruff
-        args: [--fix, --exit-non-zero-on-fix, --ignore, "E501"]
+        args: [--fix, --exit-non-zero-on-fix, --ignore, "E501,E402"]
