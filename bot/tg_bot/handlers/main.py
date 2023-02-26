@@ -4,7 +4,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 async def menu_handler(message: Message):
-    """Хэндлер для обработки команды /menu. Выводит меню."""
+    """Хэндлер для обработки команды /menu и /start. Выводит меню, проверяет подписку"""
     if await check_subscription(message):
         keyboard = InlineKeyboardMarkup(row_width=2)
         keyboard.add(
