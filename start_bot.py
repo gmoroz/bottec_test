@@ -8,6 +8,7 @@ from aiogram.utils import executor
 
 from bot.tg_bot.handlers.main import menu_callback_handler, menu_handler
 
+
 # настройка Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bottec_test.settings")
 django.setup()
@@ -15,6 +16,9 @@ django.setup()
 
 from django.conf import settings
 from bot.tg_bot.handlers.categories import catalog_callback_handler, catalog_handler
+from bot.tg_bot.handlers.sub_categories import (
+    subcategory_callback_handler,
+)
 
 # инициализация бота и диспетчера
 bot = Bot(token=settings.BOT_TOKEN, parse_mode=ParseMode.HTML)
@@ -29,7 +33,10 @@ dp.register_callback_query_handler(catalog_handler, text="catalog")
 dp.register_callback_query_handler(
     catalog_callback_handler, lambda query: query.data.startswith("catalog:")
 )
-
+dp.register_callback_query_handler(
+    subcategory_callback_handler,
+    lambda query: query.data.startswith("subcategory:"),
+)
 # запуск бота
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
