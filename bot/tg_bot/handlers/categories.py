@@ -8,10 +8,6 @@ from asgiref.sync import sync_to_async
 from bot.tg_bot.utils.paginate import get_buttons
 
 
-def catalog_filter(c):
-    return c.data.startswith("catalog:")
-
-
 async def catalog_callback_handler(query: CallbackQuery, state: FSMContext):
     page = int(query.data.split(":")[1])
     await catalog_handler(query, page)
