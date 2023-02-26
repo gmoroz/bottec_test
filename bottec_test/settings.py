@@ -139,3 +139,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL_ID = "@bottec_channel_test"
+CATEGORY_PAGE_SIZE = 2
