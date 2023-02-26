@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'bot.User'
+AUTH_USER_MODEL = "bot.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -138,3 +138,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHANNEL_ID = "@bottec_channel_test"
