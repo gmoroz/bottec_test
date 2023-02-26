@@ -46,8 +46,16 @@ class User(AbstractUser):
     tg_id = models.BigIntegerField(unique=True)
     objects = CustomUserManager()
 
+    class Meta:
+        verbose_name = "Пользователь"
+        verbose_name_plural = "Пользователи"
+
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+
+    class Meta:
+        verbose_name = "Корзина"
+        verbose_name_plural = "Корзины"
