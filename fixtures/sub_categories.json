@@ -28,5 +28,25 @@
     "model": "bot.subcategory",
     "pk": 6,
     "fields": { "name": "Ноутбуки", "parent_category": 3 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 7,
+    "fields": { "name": "Подкатегория для пагинации 1", "parent_category": 3 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 8,
+    "fields": { "name": "Подкатегория для пагинации 2", "parent_category": 3 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 9,
+    "fields": { "name": "Подкатегория для пагинации 3", "parent_category": 3 }
+  },
+  {
+    "model": "bot.subcategory",
+    "pk": 10,
+    "fields": { "name": "Подкатегория для пагинации 4", "parent_category": 3 }
   }
 ]
