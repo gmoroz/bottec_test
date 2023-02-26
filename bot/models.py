@@ -36,6 +36,8 @@ class Product(BaseModel):
     sub_category = models.ForeignKey(
         Subcategory, on_delete=models.CASCADE, related_name="products"
     )
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    quantity = models.IntegerField(default=1)
 
     class Meta:
         verbose_name = "Товар"
@@ -53,8 +55,7 @@ class User(AbstractUser):
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    products = models.ManyToManyField(Product)
 
     class Meta:
         verbose_name = "Корзина"
