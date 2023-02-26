@@ -3,19 +3,14 @@ from bot.tg_bot.channels import check_subscription
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-async def start_handler(message: Message):
-    """Хэндлер для обработки команды /start. Проверяет подписку пользователя на канал."""
-    await check_subscription(message)
-
-
 async def menu_handler(message: Message):
     """Хэндлер для обработки команды /menu. Выводит меню."""
-    await check_subscription(message)
-    keyboard = InlineKeyboardMarkup(row_width=2)
-    keyboard.add(
-        InlineKeyboardButton("Каталог", callback_data="catalog"),
-        InlineKeyboardButton("Корзина", callback_data="cart"),
-        InlineKeyboardButton("FAQ", callback_data="faq"),
-    )
-    # Отправляем сообщение с InlineKeyboardMarkup пользователю
-    await message.answer("Выберите действие:", reply_markup=keyboard)
+    if await check_subscription(message):
+        keyboard = InlineKeyboardMarkup(row_width=2)
+        keyboard.add(
+            InlineKeyboardButton("Каталог", callback_data="catalog"),
+            InlineKeyboardButton("Корзина", callback_data="cart"),
+            InlineKeyboardButton("FAQ", callback_data="faq"),
+        )
+        # Отправляем сообщение с InlineKeyboardMarkup пользователю
+        await message.answer("Выберите действие:", reply_markup=keyboard)
