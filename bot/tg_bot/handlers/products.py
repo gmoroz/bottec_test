@@ -2,12 +2,13 @@ from aiogram.types import (
     CallbackQuery,
     InlineKeyboardMarkup,
     InputMediaPhoto,
+    InlineKeyboardButton,
 )
 from django.conf import settings
 from bot.models import Subcategory
 from aiogram.dispatcher import FSMContext
 from asgiref.sync import sync_to_async
-from bot.tg_bot.utils.paginate import get_buttons
+from bot.tg_bot.utils.keyboards import get_buttons
 from aiogram.types.input_file import InputFile
 
 
@@ -28,9 +29,10 @@ async def products_handler(query: CallbackQuery, page: int = 1):
         products_count + int(settings.PRODUCTS_ITEMS_ON_PAGE > 1)
     ) // settings.PRODUCTS_ITEMS_ON_PAGE
     product = await sync_to_async(products.__getitem__)(page - 1)
+    cart_button = InlineKeyboardButton("Добавить в корзину", callback_data=f"cart_add:{product.id}")
     butttons = await get_buttons(
         page, total_pages, callback_data=f"product:{subcategory_id}"
-    )
+    ) + [cart_button]
     keyboard.add(*butttons)
     if query.message.photo:
         await query.bot.edit_message_media(

@@ -5,7 +5,7 @@ from asgiref.sync import sync_to_async
 from bot.models import Category
 from aiogram.dispatcher import FSMContext
 
-from bot.tg_bot.utils.paginate import get_buttons
+from bot.tg_bot.utils.keyboards import get_buttons
 
 
 async def subcategory_callback_handler(query: CallbackQuery, state: FSMContext):

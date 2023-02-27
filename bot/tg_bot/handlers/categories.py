@@ -5,7 +5,7 @@ from bot.tg_bot.utils.db_queries import paginate_qs, get_categories
 from bot.tg_bot.handlers.sub_categories import subcategories_handler
 from asgiref.sync import sync_to_async
 
-from bot.tg_bot.utils.paginate import get_buttons
+from bot.tg_bot.utils.keyboards import get_buttons
 
 
 async def catalog_callback_handler(query: CallbackQuery, state: FSMContext):
