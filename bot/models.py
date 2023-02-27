@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
 from bot.tg_bot.managers import CustomUserManager
 
 
@@ -42,6 +41,9 @@ class Product(BaseModel):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+
+    async def caption(self):
+        return "\n".join((self.name, f"Цена: {self.price}₽", self.description))
 
 
 class User(AbstractUser):
