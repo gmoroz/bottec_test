@@ -29,7 +29,9 @@ async def products_handler(query: CallbackQuery, page: int = 1):
         products_count + int(settings.PRODUCTS_ITEMS_ON_PAGE > 1)
     ) // settings.PRODUCTS_ITEMS_ON_PAGE
     product = await sync_to_async(products.__getitem__)(page - 1)
-    cart_button = InlineKeyboardButton("Добавить в корзину", callback_data=f"cart_add:{product.id}")
+    cart_button = InlineKeyboardButton(
+        "Добавить в корзину", callback_data=f"cart_add:{product.id}:1:process"
+    )
     butttons = await get_buttons(
         page, total_pages, callback_data=f"product:{subcategory_id}"
     ) + [cart_button]

@@ -15,3 +15,7 @@ async def subcategory_filter(query: CallbackQuery):
 
 async def products_filter(query: CallbackQuery):
     return query.data.startswith("product:")
+
+
+async def cart_quantity_filter(query: CallbackQuery):
+    return query.data.startswith("cart_add:")

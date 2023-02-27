@@ -19,6 +19,7 @@ from django.conf import settings
 from bot.tg_bot.handlers.categories import catalog_callback_handler
 from bot.tg_bot.handlers.sub_categories import subcategory_callback_handler
 from bot.tg_bot.handlers.products import product_callback_handler
+from bot.tg_bot.handlers.cart import process_cart_add
 
 # инициализация бота и диспетчера
 bot = Bot(token=settings.BOT_TOKEN, parse_mode=ParseMode.HTML)
@@ -32,7 +33,7 @@ dp.register_callback_query_handler(menu_callback_handler, f.menu_filter)
 dp.register_callback_query_handler(catalog_callback_handler, f.catalog_filter)
 dp.register_callback_query_handler(subcategory_callback_handler, f.subcategory_filter)
 dp.register_callback_query_handler(product_callback_handler, f.products_filter)
-
+dp.register_callback_query_handler(process_cart_add, f.cart_quantity_filter)
 
 # запуск бота
 if __name__ == "__main__":
