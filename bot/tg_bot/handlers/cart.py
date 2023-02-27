@@ -10,8 +10,13 @@ from django.conf import settings
 
 async def process_cart_add(query: CallbackQuery):
     _, product_id, quantity, action = query.data.split(":")
-    user_id = query.from_user.id
-    quantity = int(quantity)
+    tg_id = query.from_user.id
+    quantity, product_id = map(int, (quantity, product_id))
+    cart = await Cart.objects.aget(user__tg_id=tg_id)
+    product = await cart.products.filter(product_id=product_id).afirst()
+    if product:
+        await query.answer(text="Этот товар уже есть в вашей корзине!")
+        await menu_callback_handler(query)
 
     match action:
         case "increment":
@@ -19,10 +24,10 @@ async def process_cart_add(query: CallbackQuery):
         case "decrement":
             quantity = quantity - 1 if quantity > 1 else quantity
 
-    keyboard = await get_quantity_keyboard(int(product_id), quantity)
+    keyboard = await get_quantity_keyboard(product_id, quantity)
     text = f"Текущее количество: {quantity}\nУкажите количество или подтвердите покупку"
     if query.message.photo:
-        await query.bot.send_message(user_id, text, reply_markup=keyboard)
+        await query.message.answer(text, reply_markup=keyboard)
     else:
         try:
             await query.message.edit_text(text, reply_markup=keyboard)
@@ -65,15 +70,17 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
     if page is None:
         page = int(query.data.split(":")[1])
     tg_id = query.from_user.id
-    user = await User.objects.aget(tg_id=tg_id)
-    products = []
-    if (
-        cart := await Cart.objects.filter(user=user)
+
+    cart = (
+        await Cart.objects.filter(user__tg_id=tg_id)
         .prefetch_related("products__product")
         .afirst()
-    ):
+    )
+    cart_products = cart.products.all()
+    products_count = await cart_products.acount()
+    if products_count:
+        products = []
         keyboard = InlineKeyboardMarkup(row_width=1)
-        cart_products = cart.products.all()
         cart_products_list = await paginate_qs(
             page, settings.PRODUCTS_IN_CART_COUNT, cart_products
         )
@@ -87,7 +94,7 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
             )
             keyboard.insert(button)
         text = "\n".join(products)
-        products_count = await cart_products.acount()
+
         total_pages = (
             products_count + products_count % 2
         ) // settings.PRODUCTS_IN_CART_COUNT
@@ -101,4 +108,12 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
             await query.message.edit_text(text=text, reply_markup=keyboard)
     else:
         await query.answer("Ваша корзина пуста!")
-        await menu_callback_handler(query)
+        return
+
+
+async def cart_delete_product(query: CallbackQuery):
+    product_id, cart_id = map(int, query.data.split(":")[1:])
+    await CartProduct.objects.filter(cart_id=cart_id, product_id=product_id).adelete()
+    await query.message.answer("Товар успешно удален из корзины!")
+    query.data = "cart:1"
+    await menu_callback_handler(query)
