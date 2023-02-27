@@ -56,7 +56,6 @@ class User(AbstractUser):
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
 
     class Meta:
         verbose_name = "Корзина"
@@ -64,6 +63,6 @@ class Cart(models.Model):
 
 
 class CartProduct(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="products")
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
