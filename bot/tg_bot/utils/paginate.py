@@ -1,7 +1,9 @@
 from aiogram.types import InlineKeyboardButton
 
 
-async def get_buttons(page: int, total_pages, callback_data):
+async def get_buttons(
+    page: int, total_pages: int, callback_data: str
+) -> list[InlineKeyboardButton]:
     buttons: list[InlineKeyboardButton] = []
     if total_pages > 1:
         if page > 1:
