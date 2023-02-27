@@ -5,9 +5,9 @@
     "fields": {
       "name": "Шкаф для одежды Романтика",
       "description": "Шкаф для одежды Романтика – прекрасное решение для вашей спальни. Компактный, стильный и функциональный – именно таким должен быть шкаф для одежды в вашем доме.",
-      "image": "static/images/test_image.jpg",
+      "image": "static/images/romantic_wardrobe.png",
       "sub_category": 1,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -16,9 +16,9 @@
     "fields": {
       "name": "Шкаф для одежды Фаворит",
       "description": "Шкаф для одежды Фаворит – это мебель, которая прекрасно впишется в любой интерьер. Простой дизайн, высокое качество материалов и удобная конструкция сделают вашу жизнь комфортнее.",
-      "image": "static/images/test_image.jpg",
+      "image": "static/images/favorit.png",
       "sub_category": 1,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -29,7 +29,7 @@
       "description": "Шкаф для одежды Классик – это мебель, которая подчеркнет ваш безупречный вкус и чувство стиля. Классический дизайн, качественные материалы и удобная конструкция – все это делает этот шкаф отличным выбором.",
       "image": "static/images/test_image.jpg",
       "sub_category": 1,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -40,7 +40,7 @@
       "description": "Шкаф для одежды Модерн – это мебель, которая подчеркнет ваш современный взгляд на дизайн и комфорт. Оригинальный дизайн, высокое качество материалов и удобная конструкция – все это делает этот шкаф отличным выбором.",
       "image": "static/images/test_image.jpg",
       "sub_category": 1,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -51,7 +51,7 @@
       "description": "Компактный стеллаж для хранения посуды изготовленный из качественного материала.",
       "image": "static/images/test_image.jpg",
       "sub_category": 2,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -62,7 +62,7 @@
       "description": "Удобный и практичный стеллаж для хранения книг. Идеально подойдет для организации библиотеки дома или в офисе.",
       "image": "static/images/test_image.jpg",
       "sub_category": 2,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -73,7 +73,7 @@
       "description": "Яркий и красочный стеллаж для хранения детских игрушек. Он не только позволяет удобно хранить игрушки, но и дополнит интерьер детской комнаты.",
       "image": "static/images/test_image.jpg",
       "sub_category": 2,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -84,7 +84,7 @@
       "description": "Компактный и удобный стеллаж для хранения обуви. Благодаря своей конструкции, он позволяет оптимально использовать пространство и удобно организовать хранение обуви.",
       "image": "static/images/test_image.jpg",
       "sub_category": 2,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -95,7 +95,7 @@
       "description": "Стильный и мощный холодильник Samsung RS64R5101B1/TL вмещает до 570 литров и имеет удобную функцию No Frost. Технология All-Around Cooling позволяет поддерживать постоянную температуру внутри холодильника, а Digital Inverter тихо и эффективно работает, экономя энергию.",
       "image": "static/images/test_image.jpg",
       "sub_category": 3,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -106,7 +106,7 @@
       "description": "Элегантный и компактный холодильник LG GA-B519SEQZ вмещает до 454 литров и имеет удобную функцию No Frost. Технология Door Cooling позволяет быстро охлаждать напитки и продукты, а интеллектуальный компрессор Linear Inverter экономит энергию.",
       "image": "static/images/test_image.jpg",
       "sub_category": 3,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -117,7 +117,7 @@
       "description": "Современный и надежный холодильник Bosch KGN56XIFAE вмещает до 570 литров и имеет удобную функцию No Frost. Технология VitaFresh Plus сохраняет свежесть фруктов, овощей и мяса на дольший срок, а инверторный компрессор работает тихо и экономично.",
       "image": "static/images/test_image.jpg",
       "sub_category": 3,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -128,7 +128,7 @@
       "description": "Простой и надежный холодильник Indesit LI7 FF1 X вмещает до 307 литров и имеет удобную функцию No Frost. Технология Super Cool позволяет быстро охлаждать продукты после загрузки, а компрессор работает тихо и стабильно.",
       "image": "static/images/test_image.jpg",
       "sub_category": 3,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -139,7 +139,7 @@
       "description": "Этот пылесос оснащен мощным двигателем и легок в управлении.",
       "image": "static/images/test_image.jpg",
       "sub_category": 4,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -150,7 +150,7 @@
       "description": "Стильный и функциональный пылесос с высокой мощностью.",
       "image": "static/images/test_image.jpg",
       "sub_category": 4,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -161,7 +161,7 @@
       "description": "Мощный и тихий пылесос, идеальный для любого дома.",
       "image": "static/images/test_image.jpg",
       "sub_category": 4,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -172,7 +172,7 @@
       "description": "Самый мощный и технологичный пылесос на рынке.",
       "image": "static/images/test_image.jpg",
       "sub_category": 4,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -183,7 +183,7 @@
       "description": "Новый флагман от Samsung с OLED-дисплеем, 8 ГБ ОЗУ и 128 ГБ встроенной памяти",
       "image": "static/images/test_image.jpg",
       "sub_category": 5,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -194,7 +194,7 @@
       "description": "Новый флагман от Apple с OLED-дисплеем, A14 Bionic, и 128 ГБ встроенной памяти",
       "image": "static/images/test_image.jpg",
       "sub_category": 5,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -205,7 +205,7 @@
       "description": "Новый флагман от OnePlus с AMOLED-дисплеем, Snapdragon 888, и 128 ГБ встроенной памяти",
       "image": "static/images/test_image.jpg",
       "sub_category": 5,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -216,7 +216,7 @@
       "description": "Новый флагман от Xiaomi с AMOLED-дисплеем, Snapdragon 888, и 256 ГБ встроенной памяти",
       "image": "static/images/test_image.jpg",
       "sub_category": 5,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -227,7 +227,7 @@
       "description": "Ноутбук Acer Aspire 5 является отличным выбором для офисных задач, веб-серфинга и мультимедиа. Он оснащен Intel Core i5, 8 ГБ оперативной памяти и 256 ГБ SSD-накопителем.",
       "image": "static/images/test_image.jpg",
       "sub_category": 6,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -238,7 +238,7 @@
       "description": "Ноутбук HP Pavilion x360 имеет сенсорный дисплей, что делает его удобным для работы с приложениями и использования в режиме планшета. Он оснащен Intel Core i3, 4 ГБ оперативной памяти и 128 ГБ SSD-накопителем.",
       "image": "static/images/test_image.jpg",
       "sub_category": 6,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -249,7 +249,7 @@
       "description": "Ноутбук ASUS VivoBook S14 имеет компактный и легкий дизайн, который делает его удобным для переноски. Он оснащен Intel Core i7, 16 ГБ оперативной памяти и 512 ГБ SSD-накопителем.",
       "image": "static/images/test_image.jpg",
       "sub_category": 6,
-      "price": 1000.00
+      "price": 1000.0
     }
   },
   {
@@ -260,7 +260,7 @@
       "description": "Ноутбук Lenovo ThinkPad E14 является отличным выбором для бизнес-задач и профессиональной работы. Он оснащен Intel Core i5, 8 ГБ оперативной памяти и 256 ГБ SSD-накопителем.",
       "image": "static/images/test_image.jpg",
       "sub_category": 6,
-      "price": 1000.00
+      "price": 1000.0
     }
   }
 ]
