@@ -43,7 +43,7 @@ async def cart_ask_confirmation_callback(query: CallbackQuery):
         text += f"\n цена за {quantity} шт: {quantity * product.price}₽"
     keyboard = InlineKeyboardMarkup(row_width=2)
     ok_button = InlineKeyboardButton(
-        "Перейти в корзину", callback_data=f"cart_update:{product_id}:{quantity}"
+        "Да, перейти в корзину", callback_data=f"cart_update:{product_id}:{quantity}"
     )
     back_button = InlineKeyboardButton(
         "Назад", callback_data=f"cart_add:{product_id}:{quantity}:process"
@@ -114,6 +114,6 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
 async def cart_delete_product(query: CallbackQuery):
     product_id, cart_id = map(int, query.data.split(":")[1:])
     await CartProduct.objects.filter(cart_id=cart_id, product_id=product_id).adelete()
-    await query.message.answer("Товар успешно удален из корзины!")
+    await query.answer("Товар успешно удален из корзины!")
     query.data = "cart:1"
-    await menu_callback_handler(query)
+    await cart_show(query)
