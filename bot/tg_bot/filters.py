@@ -19,3 +19,11 @@ async def products_filter(query: CallbackQuery):
 
 async def cart_quantity_filter(query: CallbackQuery):
     return query.data.startswith("cart_add:")
+
+
+async def cart_confirm_filter(query: CallbackQuery):
+    return query.data.startswith("cart_confirm:")
+
+
+async def add_product_to_cart_filter(query: CallbackQuery):
+    return query.data.startswith("cart_update:")
