@@ -6,18 +6,13 @@ from aiogram.types import (
 )
 from django.conf import settings
 from bot.models import Subcategory
-from aiogram.dispatcher import FSMContext
 from asgiref.sync import sync_to_async
 from bot.tg_bot.utils.keyboards import get_buttons
 from aiogram.types.input_file import InputFile
 
 
-async def product_callback_handler(query: CallbackQuery, state: FSMContext):
+async def product_callback_handler(query: CallbackQuery):
     page = int(query.data.split(":")[2])
-    await products_handler(query, page)
-
-
-async def products_handler(query: CallbackQuery, page: int = 1):
     subcategory_id = int(query.data.split(":")[1])
     subcategory = await Subcategory.objects.aget(pk=subcategory_id)
     products = subcategory.products.order_by("pk").all()

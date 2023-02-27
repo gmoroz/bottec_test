@@ -38,6 +38,7 @@ dp.register_callback_query_handler(
 )
 dp.register_callback_query_handler(c.add_product_to_cart, f.add_product_to_cart_filter)
 dp.register_callback_query_handler(c.cart_show, f.cart_show_filter)
+dp.register_callback_query_handler(c.cart_delete_product, f.cart_delete_product_filter)
 
 # запуск бота
 if __name__ == "__main__":
