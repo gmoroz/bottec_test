@@ -23,9 +23,9 @@ async def get_buttons(
 async def get_quantity_keyboard(quantity: int = 1):
     plus_button = InlineKeyboardButton("+", callback_data="cart_quantity:increment")
     minus_button = InlineKeyboardButton("-", callback_data="cart_quantity:decrement")
-    quantity_text = f"{quantity}"
+    quantity_text = f"Подтвердить количество товара: {quantity}"
     quantity_button = InlineKeyboardButton(
-        quantity_text, callback_data="cart_quantity:show"
+        quantity_text, callback_data=f"cart_confirm:{quantity}"
     )
 
     keyboard = InlineKeyboardMarkup(row_width=3)
