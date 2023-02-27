@@ -24,7 +24,7 @@ async def products_handler(query: CallbackQuery, page: int = 1):
 
     keyboard = InlineKeyboardMarkup(row_width=2)
 
-    products_count = await sync_to_async(products.count)()
+    products_count = await products.acount()
     total_pages = (
         products_count + int(settings.PRODUCTS_ITEMS_ON_PAGE > 1)
     ) // settings.PRODUCTS_ITEMS_ON_PAGE

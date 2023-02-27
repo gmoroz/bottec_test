@@ -3,7 +3,6 @@ from django.conf import settings
 from aiogram.dispatcher import FSMContext
 from bot.tg_bot.utils.db_queries import paginate_qs, get_categories
 from bot.tg_bot.handlers.sub_categories import subcategories_handler
-from asgiref.sync import sync_to_async
 
 from bot.tg_bot.utils.keyboards import get_buttons
 
@@ -34,7 +33,7 @@ async def catalog_handler(query: CallbackQuery, page: int = 1):
         )
         keyboard.insert(button)
 
-    categories_count = await sync_to_async(categories.count)()
+    categories_count = await categories.acount()
     # Добавляем кнопки переключения страниц
     total_pages = (categories_count + 1) // settings.CATEGORY_ITEMS_ON_PAGE
     buttons = await get_buttons(page, total_pages, "catalog")
