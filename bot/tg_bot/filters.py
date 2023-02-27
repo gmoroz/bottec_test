@@ -11,3 +11,7 @@ async def menu_filter(query: CallbackQuery):
 
 async def subcategory_filter(query: CallbackQuery):
     return query.data.startswith("subcategory:")
+
+
+async def products_filter(query: CallbackQuery):
+    return query.data.startswith("product:")
