@@ -37,10 +37,12 @@ async def process_cart_add(query: CallbackQuery):
 
 async def cart_ask_confirmation_callback(query: CallbackQuery):
     product_id, quantity = map(int, query.data.split(":")[1:])
+
     product = await Product.objects.aget(pk=product_id)
     text = f"Вы хотите добавить в корзину товар '{product.name}'\n цена за шт: {product.price}₽"
     if quantity > 1:
         text += f"\n цена за {quantity} шт: {quantity * product.price}₽"
+
     keyboard = InlineKeyboardMarkup(row_width=2)
     ok_button = InlineKeyboardButton(
         "Да, перейти в корзину", callback_data=f"cart_update:{product_id}:{quantity}"
@@ -54,6 +56,14 @@ async def cart_ask_confirmation_callback(query: CallbackQuery):
 
 async def add_product_to_cart(query: CallbackQuery):
     product_id, quantity = map(int, query.data.split(":")[1:])
+
+    tg_id = query.from_user.id
+    cart = await Cart.objects.aget(user__tg_id=tg_id)
+    product = await cart.products.filter(product_id=product_id).afirst()
+    if product:
+        await query.answer(text="Этот товар уже есть в вашей корзине!")
+        return
+
     product = await Product.objects.aget(pk=product_id)
     tg_id = query.from_user.id
     user = await User.objects.aget(tg_id=tg_id)
