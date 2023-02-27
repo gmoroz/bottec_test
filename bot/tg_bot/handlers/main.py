@@ -9,7 +9,7 @@ async def menu_handler(message: Message):
         keyboard = InlineKeyboardMarkup(row_width=2)
         keyboard.add(
             InlineKeyboardButton("Каталог", callback_data="catalog:1"),
-            InlineKeyboardButton("Корзина", callback_data="cart"),
+            InlineKeyboardButton("Корзина", callback_data="cart:1"),
             InlineKeyboardButton("FAQ", callback_data="faq"),
         )
         # Отправляем сообщение с InlineKeyboardMarkup пользователю

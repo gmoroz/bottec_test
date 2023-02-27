@@ -1,8 +1,11 @@
 from aiogram.types import CallbackQuery
 from aiogram.utils.exceptions import MessageNotModified
 from bot.models import Cart, CartProduct, Product, User
-from bot.tg_bot.utils.keyboards import get_quantity_keyboard
+from bot.tg_bot.handlers.main import menu_callback_handler
+from bot.tg_bot.utils.db_queries import paginate_qs
+from bot.tg_bot.utils.keyboards import get_buttons, get_quantity_keyboard
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from django.conf import settings
 
 
 async def process_cart_add(query: CallbackQuery):
@@ -55,8 +58,47 @@ async def add_product_to_cart(query: CallbackQuery):
         product=product,
         quantity=quantity,
     )
-    await cart_show(query)
+    await cart_show(query, page=1)
 
 
-async def cart_show(query: CallbackQuery):
-    pass
+async def cart_show(query: CallbackQuery, page: int | None = None):
+    if page is None:
+        page = int(query.data.split(":")[1])
+    tg_id = query.from_user.id
+    user = await User.objects.aget(tg_id=tg_id)
+    products = []
+    if (
+        cart := await Cart.objects.filter(user=user)
+        .prefetch_related("products__product")
+        .afirst()
+    ):
+        keyboard = InlineKeyboardMarkup(row_width=1)
+        cart_products = cart.products.all()
+        cart_products_list = await paginate_qs(
+            page, settings.PRODUCTS_IN_CART_COUNT, cart_products
+        )
+        for cart_product in cart_products_list:
+            name = cart_product.product.name
+            product_string = f"{name}: {cart_product.quantity} шт."
+            products.append(product_string)
+            button = InlineKeyboardButton(
+                f"удалить {name}...",
+                callback_data=f"delete:{cart_product.product.id}:{cart.id}",
+            )
+            keyboard.insert(button)
+        text = "\n".join(products)
+        products_count = await cart_products.acount()
+        total_pages = (
+            products_count + products_count % 2
+        ) // settings.PRODUCTS_IN_CART_COUNT
+        buttons = await get_buttons(page, total_pages, "cart")
+        keyboard.add(*buttons)
+
+        message_text = query.message.text
+        if "Вы хотите добавить в корзину товар" in message_text:
+            await query.message.answer(text=text, reply_markup=keyboard)
+        else:
+            await query.message.edit_text(text=text, reply_markup=keyboard)
+    else:
+        await query.answer("Ваша корзина пуста!")
+        await menu_callback_handler(query)
