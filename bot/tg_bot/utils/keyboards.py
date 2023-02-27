@@ -20,15 +20,19 @@ async def get_buttons(
     return buttons + [menu_button]
 
 
-async def get_quantity_keyboard(quantity: int = 1):
-    plus_button = InlineKeyboardButton("+", callback_data="cart_quantity:increment")
-    minus_button = InlineKeyboardButton("-", callback_data="cart_quantity:decrement")
-    quantity_text = f"Подтвердить количество товара: {quantity}"
-    quantity_button = InlineKeyboardButton(
-        quantity_text, callback_data=f"cart_confirm:{quantity}"
+async def get_quantity_keyboard(product_id: int, quantity: int) -> InlineKeyboardMarkup:
+    plus_button = InlineKeyboardButton(
+        "+", callback_data=f"cart_add:{product_id}:{quantity}:increment"
     )
-
+    minus_button = InlineKeyboardButton(
+        "-", callback_data=f"cart_add:{product_id}:{quantity}:decrement"
+    )
+    quantity_text = f"Подтвердить: {quantity}"
+    quantity_button = InlineKeyboardButton(
+        quantity_text, callback_data=f"cart_confirm:{product_id}:{quantity}"
+    )
+    quit_button = InlineKeyboardButton("Главное меню", callback_data="menu")
     keyboard = InlineKeyboardMarkup(row_width=3)
-    keyboard.add(minus_button, quantity_button, plus_button)
+    keyboard.add(minus_button, quantity_button, plus_button, quit_button)
 
     return keyboard
