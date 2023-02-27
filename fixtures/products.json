@@ -138,7 +138,8 @@
       "name": "Пылесос Philips PowerPro Compact",
       "description": "Этот пылесос оснащен мощным двигателем и легок в управлении.",
       "image": "static/images/test_image.jpg",
-      "sub_category": 4
+      "sub_category": 4,
+      "price": 1000.00
     }
   },
   {
