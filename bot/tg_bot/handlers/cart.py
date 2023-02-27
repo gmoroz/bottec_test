@@ -94,7 +94,9 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
         cart_products_list = await paginate_qs(
             page, settings.PRODUCTS_IN_CART_COUNT, cart_products
         )
+        amount = 0
         for cart_product in cart_products_list:
+            amount += cart_product.quantity * cart_product.product.price
             name = cart_product.product.name
             product_string = f"{name}: {cart_product.quantity} шт."
             products.append(product_string)
@@ -110,7 +112,9 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
         ) // settings.PRODUCTS_IN_CART_COUNT
         buttons = await get_buttons(page, total_pages, "cart")
         keyboard.add(*buttons)
-
+        keyboard.add(
+            InlineKeyboardButton("Перейти к оплате", callback_data=f"shipping:{amount}")
+        )
         message_text = query.message.text
         if "Вы хотите добавить в корзину товар" in message_text:
             await query.message.answer(text=text, reply_markup=keyboard)
