@@ -18,7 +18,7 @@ async def subcategories_handler(query: CallbackQuery, page: int = 1):
     category = await Category.objects.aget(pk=category_id)
     subcategories = category.subcategories.all()
     subcategories_qs = await paginate_qs(
-        page, settings.SUBCATEGORY_PAGE_SIZE, subcategories
+        page, settings.SUBCATEGORY_ITEMS_ON_PAGE, subcategories
     )
 
     keyboard = InlineKeyboardMarkup(row_width=1)
@@ -30,8 +30,10 @@ async def subcategories_handler(query: CallbackQuery, page: int = 1):
     subcategories_count = await sync_to_async(subcategories.count)()
 
     # Добавляем кнопки переключения страниц
-    total_pages = (subcategories_count + 1) // settings.SUBCATEGORY_PAGE_SIZE
+    total_pages = (subcategories_count + 1) // settings.SUBCATEGORY_ITEMS_ON_PAGE
+    back_button = InlineKeyboardButton("Назад к категориям", callback_data="catalog:1")
     buttons = await get_buttons(page, total_pages, f"subcategory:{category_id}")
+    buttons.insert(-2, back_button)
     keyboard.add(*buttons)
 
     await query.message.edit_reply_markup(reply_markup=keyboard)

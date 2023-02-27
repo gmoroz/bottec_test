@@ -24,7 +24,7 @@ async def catalog_handler(query: CallbackQuery, page: int = 1):
     """
     # Получаем кверисет категорий с пагинацией
     categories = await get_categories()
-    categories_qs = await paginate_qs(page, settings.CATEGORY_PAGE_SIZE, categories)
+    categories_qs = await paginate_qs(page, settings.CATEGORY_ITEMS_ON_PAGE, categories)
 
     # Создаем инлайн клавиатуру с кнопками-категориями
     keyboard = InlineKeyboardMarkup(row_width=1)
@@ -36,7 +36,7 @@ async def catalog_handler(query: CallbackQuery, page: int = 1):
 
     categories_count = await sync_to_async(categories.count)()
     # Добавляем кнопки переключения страниц
-    total_pages = (categories_count + 1) // settings.CATEGORY_PAGE_SIZE
+    total_pages = (categories_count + 1) // settings.CATEGORY_ITEMS_ON_PAGE
     buttons = await get_buttons(page, total_pages, "catalog")
     keyboard.add(*buttons)
 
