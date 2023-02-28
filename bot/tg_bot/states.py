@@ -1,16 +1,6 @@
-from aiogram.dispatcher.filters.state import State, StatesGroup
-
-
-class CatalogState(StatesGroup):
-    Category = State()
-    Subcategory = State()
-    Product = State()
+from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
 class OrderState(StatesGroup):
-    Shipping = State()
-    Payment = State()
-
-
-class FAQState(StatesGroup):
-    Answer = State()
+    waiting_for_address = State()
+    waiting_for_address_confirmation = State()

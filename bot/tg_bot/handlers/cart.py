@@ -6,6 +6,8 @@ from bot.tg_bot.utils.db_queries import paginate_qs
 from bot.tg_bot.utils.keyboards import get_buttons, get_quantity_keyboard
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from django.conf import settings
+from aiogram.dispatcher import FSMContext
+from bot.tg_bot.handlers.shipping import shipping_callback
 
 
 async def process_cart_add(query: CallbackQuery):
@@ -54,7 +56,7 @@ async def cart_ask_confirmation_callback(query: CallbackQuery):
     await query.message.edit_text(text, reply_markup=keyboard)
 
 
-async def add_product_to_cart(query: CallbackQuery):
+async def add_product_to_cart(query: CallbackQuery, state: FSMContext):
     product_id, quantity = map(int, query.data.split(":")[1:])
 
     tg_id = query.from_user.id
@@ -73,10 +75,10 @@ async def add_product_to_cart(query: CallbackQuery):
         product=product,
         quantity=quantity,
     )
-    await cart_show(query, page=1)
+    await cart_show(query, state, page=1)
 
 
-async def cart_show(query: CallbackQuery, page: int | None = None):
+async def cart_show(query: CallbackQuery, state: FSMContext, page: int | None = None):
     if page is None:
         page = int(query.data.split(":")[1])
     tg_id = query.from_user.id
@@ -90,6 +92,7 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
     products_count = await cart_products.acount()
     if products_count:
         products = []
+        await state.update_data(cart_id=cart.id)
         keyboard = InlineKeyboardMarkup(row_width=1)
         cart_products_list = await paginate_qs(
             page, settings.PRODUCTS_IN_CART_COUNT, cart_products
@@ -105,6 +108,8 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
                 callback_data=f"delete:{cart_product.product.id}:{cart.id}",
             )
             keyboard.insert(button)
+        await state.update_data(amount=amount)
+        products.append(f"Общая стоимость: {amount}₽")
         text = "\n".join(products)
 
         total_pages = (
@@ -113,7 +118,10 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
         buttons = await get_buttons(page, total_pages, "cart")
         keyboard.add(*buttons)
         keyboard.add(
-            InlineKeyboardButton("Перейти к оплате", callback_data=f"shipping:{amount}")
+            InlineKeyboardButton(
+                "Заказать доставку",
+                callback_data=shipping_callback.new(action="ask_address"),
+            )
         )
         message_text = query.message.text
         if "Вы хотите добавить в корзину товар" in message_text:
@@ -125,9 +133,9 @@ async def cart_show(query: CallbackQuery, page: int | None = None):
         return
 
 
-async def cart_delete_product(query: CallbackQuery):
+async def cart_delete_product(query: CallbackQuery, state: FSMContext):
     product_id, cart_id = map(int, query.data.split(":")[1:])
     await CartProduct.objects.filter(cart_id=cart_id, product_id=product_id).adelete()
     await query.answer("Товар успешно удален из корзины!")
     query.data = "cart:1"
-    await cart_show(query)
+    await cart_show(query, state)

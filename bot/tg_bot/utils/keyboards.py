@@ -1,4 +1,5 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.utils.callback_data import CallbackData
 
 
 async def get_buttons(
@@ -35,4 +36,13 @@ async def get_quantity_keyboard(product_id: int, quantity: int) -> InlineKeyboar
     keyboard = InlineKeyboardMarkup(row_width=3)
     keyboard.add(minus_button, quantity_button, plus_button, quit_button)
 
+    return keyboard
+
+
+async def get_address_confirm_keyboard(callback: CallbackData) -> InlineKeyboardMarkup:
+    keyboard = InlineKeyboardMarkup()
+    keyboard.row(
+        InlineKeyboardButton("Да", callback_data=callback.new(action="confirm")),
+        InlineKeyboardButton("Нет", callback_data=callback.new(action="edit")),
+    )
     return keyboard
