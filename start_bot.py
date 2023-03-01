@@ -26,6 +26,7 @@ from bot.tg_bot.states import OrderState
 bot = Bot(token=settings.BOT_TOKEN, parse_mode=ParseMode.HTML)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
+order_state = OrderState()
 
 # регистрация хэндлеров и настроек диспетчера
 
@@ -42,9 +43,22 @@ dp.register_callback_query_handler(c.process_cart_add, f.cart_quantity_filter)
 dp.register_callback_query_handler(
     c.cart_ask_confirmation_callback, f.cart_confirm_filter
 )
-dp.register_callback_query_handler(c.add_product_to_cart, f.add_product_to_cart_filter)
-dp.register_callback_query_handler(c.cart_show, f.cart_show_filter)
-dp.register_callback_query_handler(c.cart_delete_product, f.cart_delete_product_filter)
+
+dp.register_callback_query_handler(
+    c.add_product_to_cart,
+    f.add_product_to_cart_filter,
+)
+dp.register_callback_query_handler(
+    c.cart_show,
+    f.cart_show_filter,
+)
+dp.register_callback_query_handler(
+    c.cart_delete_product,
+    f.cart_delete_product_filter,
+)
+dp.register_callback_query_handler(c.add_product_to_cart, state=order_state)
+dp.register_callback_query_handler(c.cart_show, state=order_state)
+dp.register_callback_query_handler(c.cart_delete_product, state=order_state)
 
 dp.register_callback_query_handler(
     s.ask_address, s.shipping_callback.filter(action="ask_address")
