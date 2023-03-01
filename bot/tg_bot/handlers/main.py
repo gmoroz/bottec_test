@@ -3,7 +3,9 @@ from bot.tg_bot.channels import check_subscription
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 
-async def menu_handler(message: Message, check=True):
+async def menu_handler(
+    message: Message,
+):
     """Хэндлер для обработки команды /menu и /start. Выводит меню, проверяет подписку"""
     if await check_subscription(message):
         keyboard = InlineKeyboardMarkup(row_width=2)
@@ -17,4 +19,4 @@ async def menu_handler(message: Message, check=True):
 
 
 async def menu_callback_handler(query: CallbackQuery):
-    await menu_handler(query.message, check=False)
+    await menu_handler(query.message)
