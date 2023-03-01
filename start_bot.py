@@ -21,7 +21,7 @@ from bot.tg_bot.handlers import cart as c
 from bot.tg_bot.handlers.main import menu_callback_handler, menu_handler
 from bot.tg_bot.handlers import shipping as s
 from bot.tg_bot.states import OrderState
-from bot.tg_bot.handlers.faq import faq_handler, show_question
+from bot.tg_bot.handlers import faq
 
 # инициализация бота и диспетчера
 bot = Bot(token=settings.BOT_TOKEN, parse_mode=ParseMode.HTML)
@@ -83,8 +83,10 @@ dp.register_callback_query_handler(
     s.edit_address, state=OrderState.waiting_for_address_confirmation
 )
 
-dp.register_callback_query_handler(faq_handler, f.faq_filter)
-dp.register_callback_query_handler(show_question, f.question_show_filter)
+dp.register_callback_query_handler(faq.faq_handler, f.faq_filter)
+dp.register_callback_query_handler(faq.show_question, f.question_show_filter)
+dp.register_callback_query_handler(faq.ask_question, f.ask_question_filter)
+dp.register_message_handler(faq.save_question, state="wait_for_question")
 
 # запуск бота
 if __name__ == "__main__":

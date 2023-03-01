@@ -43,3 +43,7 @@ async def faq_filter(query: CallbackQuery):
 
 async def question_show_filter(query: CallbackQuery):
     return query.data.startswith("question:")
+
+
+async def ask_question_filter(query: CallbackQuery):
+    return query.data == "ask_question"
