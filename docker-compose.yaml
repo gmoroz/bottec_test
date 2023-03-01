@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    env_file:
+      .env.docker
+    entrypoint: ["sh", "entrypoint.sh"]
+    ports:
+      - 80:80
+    volumes:
+      - staticdata:/usr/src/app/static_files
+    depends_on:
+      db:
+        condition: service_healthy
+
+  bot:
+    build: .
+    command: ["python", "/code/start_bot.py"]
+    env_file:
+      - .env.docker
+    depends_on:
+      - web
+
+  db:
+    image: postgres:latest
+    env_file:
+      .env.docker
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB'"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  staticdata:

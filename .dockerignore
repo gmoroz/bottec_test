@@ -1,0 +1,7 @@
+.gitignore
+.venv/
+__pycache__/
+.git
+.mypy_cache/
+.ruff_cache/
+*.xlsx
