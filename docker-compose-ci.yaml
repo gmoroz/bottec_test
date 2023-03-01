@@ -13,7 +13,6 @@ x-common-variables: &common-variables
   SHOP_ID_YOOKASSA: $SHOP_ID_YOOKASSA
   REDIRECT_URL: $REDIRECT_URL
 
-
 services:
   web:
     image: gmoroz/bottec_test:$GITHUB_REF_NAME-$GITHUB_RUN_ID

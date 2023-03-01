@@ -58,5 +58,5 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd bottec_test
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose down -d
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose down
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
