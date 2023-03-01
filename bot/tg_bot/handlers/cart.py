@@ -14,7 +14,8 @@ async def process_cart_add(query: CallbackQuery):
     _, product_id, quantity, action = query.data.split(":")
     tg_id = query.from_user.id
     quantity, product_id = map(int, (quantity, product_id))
-    cart = await Cart.objects.aget(user__tg_id=tg_id)
+    user = await User.objects.aget(tg_id=tg_id)
+    cart, _ = await Cart.objects.aget_or_create(user=user)
     product = await cart.products.filter(product_id=product_id).afirst()
     if product:
         await query.answer(text="Этот товар уже есть в вашей корзине!")
@@ -60,16 +61,14 @@ async def add_product_to_cart(query: CallbackQuery, state: FSMContext):
     product_id, quantity = map(int, query.data.split(":")[1:])
 
     tg_id = query.from_user.id
-    cart = await Cart.objects.aget(user__tg_id=tg_id)
+    user = await User.objects.aget(tg_id=tg_id)
+    cart, _ = await Cart.objects.aget_or_create(user=user)
     product = await cart.products.filter(product_id=product_id).afirst()
     if product:
         await query.answer(text="Этот товар уже есть в вашей корзине!")
         return
 
     product = await Product.objects.aget(pk=product_id)
-    tg_id = query.from_user.id
-    user = await User.objects.aget(tg_id=tg_id)
-    cart, _ = await Cart.objects.aget_or_create(user=user)
     await CartProduct.objects.acreate(
         cart=cart,
         product=product,
@@ -88,9 +87,9 @@ async def cart_show(query: CallbackQuery, state: FSMContext, page: int | None = 
         .prefetch_related("products__product")
         .afirst()
     )
-    cart_products = cart.products.all()
-    products_count = await cart_products.acount()
-    if products_count:
+    if cart:
+        cart_products = cart.products.all()
+        products_count = await cart_products.acount()
         products = []
         await state.update_data(cart_id=cart.id)
         keyboard = InlineKeyboardMarkup(row_width=1)
@@ -104,7 +103,7 @@ async def cart_show(query: CallbackQuery, state: FSMContext, page: int | None = 
             product_string = f"{name}: {cart_product.quantity} шт."
             products.append(product_string)
             button = InlineKeyboardButton(
-                f"удалить {name}...",
+                f"удалить {name}",
                 callback_data=f"delete:{cart_product.product.id}:{cart.id}",
             )
             keyboard.insert(button)
