@@ -6,6 +6,7 @@ from aiogram.types import (
 from aiogram.utils.callback_data import CallbackData
 from bot.models import Cart
 from bot.tg_bot.handlers.main import menu_callback_handler
+from bot.tg_bot.utils.excel_write import save_order_data_to_excel
 from bot.tg_bot.utils.payments import create_payment, wait_for_payment_confirmation
 
 from bot.tg_bot.states import OrderState
@@ -21,7 +22,7 @@ async def ask_address(call: CallbackQuery, state: FSMContext):
 
 async def receive_address(message: Message, state: FSMContext):
     address = message.text
-    await state.update_data(address=address)
+    await state.update_data(address=address, username=message.from_user.username)
 
     data = await state.get_data()
     amount = data.get("amount")
@@ -40,8 +41,8 @@ async def receive_address(message: Message, state: FSMContext):
 
     keyboard = await get_address_confirm_keyboard(shipping_callback)
     await message.answer(
-        f"Ваши товары: {products_string} Ваш адрес доставки: {address}\n"
-        "\nПодтвердите, что это правильный адрес:",
+        f"Ваши товары: {products_string}\nВаш адрес доставки: {address}\n"
+        "\nПодтвердите, что это правильный адрес",
         reply_markup=keyboard,
     )
     await OrderState.waiting_for_address_confirmation.set()
@@ -63,8 +64,25 @@ async def confirm_address(query: CallbackQuery, state: FSMContext):
     payment_status = await wait_for_payment_confirmation(payment_id)
 
     if payment_status:
+        username = data.get("username")
+        cart = (
+            await Cart.objects.filter(pk=cart_id)
+            .prefetch_related("products__product")
+            .afirst()
+        )
+        products = []
+        async for cart_product in cart.products.all():
+            products.append((cart_product.product.name, cart_product.quantity))
+        data = {
+            "username": username,
+            "products": products,
+            "payment_amount": payment_amount,
+            "payment_id": payment_id,
+            "address": address,
+        }
+
         await Cart.objects.filter(pk=cart_id).adelete()
-        # await save_order_data_to_excel(data)
+        await save_order_data_to_excel(data)
         await query.message.answer(
             f"Оплата прошла успешно. Ваш заказ оформлен адрес `{address}`"
         )
