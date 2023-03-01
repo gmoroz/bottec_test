@@ -1,0 +1,63 @@
+name: Build and deploy workflow
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone code
+        uses: actions/checkout@v2
+      - name: docker build api
+        run: docker build -t gmoroz/bottec_test:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+      - name: docker build front
+        run: docker build -t gmoroz/bottec_test-front:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+      - name: docker login
+        run: echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      - name: docker push api
+        run: docker push gmoroz/bottec_test:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+      - name: docker push front
+        run: docker push gmoroz/bottec_test-front:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_and_push
+    env:
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_SERVER: ${{ secrets.POSTGRES_SERVER }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      SECRET_KEY_YOOKASSA: ${{ secrets.SECRET_KEY_YOOKASSA }}
+      SHOP_ID_YOOKASSA: ${{ secrets.SHOP_ID_YOOKASSA }}
+      REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
+    steps:
+      - name: clone code
+        uses: actions/checkout@v2
+      - name: render configs
+        run: |
+          mkdir deploy
+          cat docker-compose-ci.yaml | envsubst > deploy/docker-compose.yaml
+      - name: copy files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "deploy/docker-compose.yaml"
+          target: "bottec_test"
+          strip_components: 1
+      - name: deploy app and clean old version
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd bottec_test
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker image prune -af
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker volume prune -f --filter "label!=todolist_postgres_data"
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
