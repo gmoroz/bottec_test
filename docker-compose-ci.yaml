@@ -21,7 +21,7 @@ services:
   web:
     image: gmoroz/bottec_test:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     environment:
-      *common-variables
+      <<: *common-variables
     entrypoint: ["sh", "entrypoint.sh"]
     ports:
       - 80:80
@@ -35,14 +35,14 @@ services:
     image: gmoroz/bottec_test:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     command: ["python", "/code/start_bot.py"]
     environment:
-      *common-variables
+      <<: *common-variables
     depends_on:
       - web
 
   db:
     image: postgres:latest
     environment:
-      *db-variables
+      <<: *db-variables
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
