@@ -73,3 +73,8 @@ class CartProduct(models.Model):
 
     def __str__(self):
         return f"{self.product.name} {self.quantity} шт."
+
+
+class FAQ(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
