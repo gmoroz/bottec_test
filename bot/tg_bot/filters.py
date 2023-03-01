@@ -35,3 +35,11 @@ async def cart_show_filter(query: CallbackQuery):
 
 async def cart_delete_product_filter(query: CallbackQuery):
     return query.data.startswith("delete:")
+
+
+async def faq_filter(query: CallbackQuery):
+    return query.data.startswith("faq:")
+
+
+async def question_show_filter(query: CallbackQuery):
+    return query.data.startswith("question:")
