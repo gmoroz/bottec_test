@@ -6,6 +6,7 @@ from aiogram.types import (
 from aiogram.utils.callback_data import CallbackData
 from bot.models import Cart
 from bot.tg_bot.handlers.main import menu_callback_handler
+from bot.tg_bot.utils.payments import create_payment, wait_for_payment_confirmation
 
 from bot.tg_bot.states import OrderState
 from bot.tg_bot.utils.keyboards import get_address_confirm_keyboard
@@ -50,9 +51,25 @@ async def confirm_address(query: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     address = data.get("address")
     cart_id = data.get("cart_id")
-    await Cart.objects.filter(pk=cart_id).adelete()
-    # TODO: Платежка тинькофф / фрикасса
-    await query.message.answer(f"Заказ оформлен на адрес {address}")
+    payment_amount = data.get("amount")
+    payment = await create_payment(cart_id, payment_amount)
+    payment_id = payment.id
+    payment_url = payment.confirmation.confirmation_url
+
+    await query.message.answer(
+        f"Для оплаты заказа на адрес `{address}` перейдите по ссылке: {payment_url}"
+    )
+
+    payment_status = await wait_for_payment_confirmation(payment_id)
+
+    if payment_status:
+        await Cart.objects.filter(pk=cart_id).adelete()
+        # await save_order_data_to_excel(data)
+        await query.message.answer(
+            f"Оплата прошла успешно. Ваш заказ оформлен адрес `{address}`"
+        )
+    else:
+        await query.message.answer("Оплата не удалась. Попробуйте еще раз.")
 
     await state.finish()
     await menu_callback_handler(query)
