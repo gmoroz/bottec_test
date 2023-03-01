@@ -77,4 +77,11 @@ class CartProduct(models.Model):
 
 class FAQ(models.Model):
     question = models.TextField()
-    answer = models.TextField()
+    answer = models.TextField(default="На данный вопрос пока что нет ответа")
+
+    class Meta:
+        verbose_name = "Вопрос и ответ"
+        verbose_name_plural = "Вопросы и ответы"
+
+    def __str__(self):
+        return self.question
