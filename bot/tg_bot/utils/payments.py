@@ -3,6 +3,7 @@ import uuid
 from yookassa import Payment, Configuration
 from django.conf import settings
 from asgiref.sync import sync_to_async
+from yookassa.domain.response import PaymentResponse
 
 Configuration.configure(settings.SHOP_ID_YOOKASSA, settings.SECRET_KEY_YOOKASSA)
 
@@ -28,7 +29,7 @@ async def create_payment(cart_id: int, amount: float) -> Payment:
 
 async def wait_for_payment_confirmation(payment_id: int) -> bool | None:
     while True:
-        payment = await sync_to_async(Payment.find_one)(payment_id)
+        payment: PaymentResponse = await sync_to_async(Payment.find_one)(payment_id)
         if payment.status == "succeeded":
             return True
         elif payment == "canceled":
